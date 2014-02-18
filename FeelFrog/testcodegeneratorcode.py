@@ -42,6 +42,14 @@ for j in range(1, 1000):         #runs 999 times, which, added to L[0] and c[0],
 
 #for testing porpoises.
 #for k in range(0, 1000):
-#  print "line %d" % (k + 1)
 #  print L[k]
-  
+ 
+#for saving to file. hopefully.
+#f = open('testfile.txt', 'w')
+#S = str(L)
+#f.write(S)
+
+#if you want more data, increase the value X in line 21: for j in range(1, x)
+#if you want to change the effect of the activities, they are set up as: [A,B], 
+#with A being whether the effect is positive or negative, and B being the extent (from 0 to 4)*
+#*you can increase this by more, but it will only serve to cancel out other activity effects, since mood caps at 1 and 5.
