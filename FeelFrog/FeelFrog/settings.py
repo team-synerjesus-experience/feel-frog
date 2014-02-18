@@ -1,5 +1,5 @@
 """
-Django settings for jesus project.
+Django settings for FeelFrog project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y3qq31$@+-3ofedlp56f(q=h2+yx30+2xe1a3gb-f8b&0oy4gd'
+SECRET_KEY = 'xv5o)))eq(oi0b-7x)@2ry*710#ey7ogg+0bnwl0&x=3vf6-+%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,9 +47,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'jesus.urls'
+ROOT_URLCONF = 'FeelFrog.urls'
 
-WSGI_APPLICATION = 'jesus.wsgi.application'
+WSGI_APPLICATION = 'FeelFrog.wsgi.application'
 
 
 # Database
