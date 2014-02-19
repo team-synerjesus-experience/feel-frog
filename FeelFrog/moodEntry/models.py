@@ -62,10 +62,10 @@ class ActivityVector(models.Model):
     return u'%i' % (self.vector)
 
   def getVec(self):
-    vect = [11]
+    vect = []
     for x in range(0, 9):
-      vect[x] = ((self.vector)>>x)%2
-    vect[10] = ((self.vector)>>10)%8
+      vect.append(((self.vector)>>x)%2)
+    vect.append(((self.vector)>>10)%8)
     return vect
 
 class MoodPredicted(models.Model):
