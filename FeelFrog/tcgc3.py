@@ -15,7 +15,7 @@ VT = [[True,0],
 L = []
 
 #start of data generation
-for j in range(1, 20):         #runs 999 times, which, added to L[0] and c[0], gives 1000 results
+for j in range(1, 100):         #runs 999 times, which, added to L[0] and c[0], gives 1000 results
   a = [0,0,0,0,0,0,0,0,0,0]
   m = 3                      #keeps a note of the initial state of m
   hage = False
@@ -31,9 +31,6 @@ for j in range(1, 20):         #runs 999 times, which, added to L[0] and c[0], g
       else:                        #if the value of the activity is negative, 
         mtot = mtot - VT[i][1]
         habe = True
-  print "a: " + str(a)
-  print "habe: " + str(habe)
-  print "hage: " + str(hage)  
   if ((habe == False) and (hage == True)):
     m = 5
   elif((habe == True) and (hage == False)):
@@ -47,7 +44,7 @@ for j in range(1, 20):         #runs 999 times, which, added to L[0] and c[0], g
       m = 2
     else:
       m = 3
-  print "m: " + str(m)
+
 		  
   L.append([a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9], m]) #stores the values in the list.
 #end of data generation.
