@@ -1,8 +1,41 @@
 from sklearn import tree
 import random
+from math import floor
+from scipy import stats
 
 def gen_data(n):
 	return [[random.randint(0,1) for r in xrange(10)] + [random.randint(1,5)] for p in xrange(n)]
+
+
+def foldr(f, z, l):
+	for i in xrange(len(l)):
+		z = f(l.pop(), z)
+
+	return z
+
+
+
+def gen_data_biased(n):
+	event_moods = [random.randint(1,4) for r in xrange(10)]
+	event_biases = [random.random() for r in xrange(10)]
+	event_bias_total = sum(event_biases)
+
+	scenarios = [[(random.randint(0,1),r) for r in xrange(10)] for p in xrange(n)]
+
+	#for each scenario [(x1, i1), ...]:
+	# - if x1 == 1, event_biases[i1] * event_moods[i1]
+	# - else 0
+	# sum these (a fold; the proper kind, not reduce)
+
+	def weighted(l, r):
+		xi, ii = l
+		s, w = r
+		if xi == 1:
+			return ((event_biases[ii] * event_moods[ii]) + s, event_biases[ii] + w)
+		else:
+			return r
+
+	return [map(lambda x: x[0], s) + [1 + foldr(lambda x,y: x/y, 1,[x for x in foldr(weighted, (0,1), s)])] for s in scenarios]
 
 
 def train(t):
@@ -40,3 +73,20 @@ def predicted_mood(i, model):
 	numerator = sum(map(lambda x: (1.0/pow(x.count(1),2)) * model.predict(x), seqs))
 
 	return numerator / normaliser
+
+def moodEquals(n):
+	return lambda x: x[10] == n
+
+def happened(n):
+	return lambda x: x[n] == 1
+
+# Correlation between variable n and mood value
+# assumes 9 >= n >= 0
+def correlation(n,t):
+	event = map(lambda x: x[n], t)
+	moods = map(lambda x: x[10], t)
+
+	c, p = stats.pearsonr(event, moods)
+
+	return c
+
