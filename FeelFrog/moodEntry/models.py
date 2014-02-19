@@ -35,3 +35,15 @@ class ActivityAtTime(models.Model):
   def is_valid(self):
     return self.timeStart < self.timeStop
 
+class ActivityVector(models.Model):
+  vector = models.IntegerField()
+  user = models.ForeignKey(User)
+
+class MoodPredicted(models.Model):
+  moodStart = models.ForeignKey(MoodAtTime, related_name="moodStart")
+  moodStop = models.ForeignKey(MoodAtTime, related_name="moodStop")
+  activityV = models.ForeignKey(ActivityVector)
+  user = models.ForeignKey(User)
+  prediction = models.IntegerField()
+  fromTime = models.DateTimeField()
+  toTime = models.DateTimeField()
