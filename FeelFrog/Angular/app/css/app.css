@@ -1,22 +1,29 @@
+* {
+  margin:0;
+}
 body{
-font: 12px Arial, sans-serif;
-background-color:rgb(225, 235, 245)
+  font: 12px Arial, sans-serif;
+  background-color:rgb(225, 235, 245)
 }
 
 #head_frog{
+  background-color:#0099FF;
   text-align: center;
 }
 
 #nav{
-  margin-left: 100px;
-  margin-right: 100px;
+  width:100%
   padding-left: 230px;
   padding-bottom: 10px;
   padding-top: 10px;
-  background-color: rgb(223, 216, 216);
-  margin-top: 20px;
+  background-color: #387919; 
   padding-left: 130px ;
-  border-radius: 10px;
+  padding-bottom:0px;
+  margin-bottom: 10px;
+}
+
+img {
+  margin:3px;
 }
 
 .content{
@@ -34,9 +41,9 @@ input[type=text]{
 }
 
 .button{
-  -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+  /*-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
   -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
-  box-shadow:inset 0px 1px 0px 0px #ffffff;
+  box-shadow:inset 0px 1px 0px 0px #ffffff;*/
   background-color:#b1ffa3;
   -webkit-border-top-left-radius:10px;
   -moz-border-radius-topleft:10px;
@@ -44,14 +51,10 @@ input[type=text]{
   -webkit-border-top-right-radius:10px;
   -moz-border-radius-topright:10px;
   border-top-right-radius:10px;
-  -webkit-border-bottom-right-radius:10px;
-  -moz-border-radius-bottomright:10px;
-  border-bottom-right-radius:10px;
-  -webkit-border-bottom-left-radius:10px;
-  -moz-border-radius-bottomleft:10px;
-  border-bottom-left-radius:10px;
   text-indent:0px;
-  border:1px solid #dcdcdc;
+  border-right:1px solid #dcdcdc;
+  border-left:1px solid #dcdcdc;
+  border-top:1px solid #dcdcdc;
   display:inline-block;
   color:#777777;
   font-family:arial;
@@ -64,6 +67,7 @@ input[type=text]{
   text-decoration:none;
   text-align:center;
   text-shadow:1px 1px 0px #ffffff;
+  margin-right:10px;
 }.button:hover {
   background-color:#6ceb6c;
 }.button:active {
