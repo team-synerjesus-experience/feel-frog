@@ -1,12 +1,17 @@
-  <div class="content">
-  <h2>
+  <div class="content cf">
+
+  <div class="left">
+    <h2>
   Choose an interval
   </h2>
-  <div class="left">
   	<ul class="header">
-        <li><a class="button" ng-click="currentIntervals=data.interval_1h">1h</a></li>
-        <li><a class="button" ng-click="currentIntervals=data.interval_6h">6h</a></li>
+        <li><a class="button small-button" ng-click="currentIntervals=data.interval_6h">6h</a></li>
+        <li><a class="button small-button" ng-click="currentIntervals=data.interval_12h">12h</a></li>
+        <li><a class="button small-button" ng-click="currentIntervals=data.interval_24h">24h</a></li>
     </ul>
+
+
+
 
     <div  style="height:400px;width:300px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 
@@ -15,14 +20,19 @@
       </ul>
 
     </div>
-
-	<div id="inputs">
-	</div>
   </div>
     <div class="right" id="inputs">
-    <ul>
-    	<li ng-repeat="action in displayInterval.activities">{{action}}</li>
+
+      <div class="left">
+          <ul class="header">
+        <h1> Activities in the perdiod of time</h1>
     </ul>
+        <div  style="height:400px;width:300px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+          <ul>
+            <li ng-repeat="activity in displayInterval.activities"> Time: {{activity.timetag}}. Activity:{{activity.description}}. </li>      
+          </ul>
+        </div>
+      </div>
     </div>
 
     <p></p>
