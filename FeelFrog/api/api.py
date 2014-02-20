@@ -21,6 +21,9 @@ def query_prediction():
 	   not 'user' in request.json:
 		abort(400)
 
+	start_date = date_parse(start)
+	end_date = date_parse(end)
+
 	# how do we get the vector we're trying to predict
 
 	# query database for vectors
