@@ -33,6 +33,7 @@ CREATE TABLE "moodEntry_activityattime" (
     "activity_id" integer NOT NULL REFERENCES "moodEntry_activity" ("id"),
     "timeStart" datetime NOT NULL,
     "timeStop" datetime NOT NULL,
+    "description" varchar(200),
     UNIQUE ("timeStart", "user_id"),
     UNIQUE ("timeStop", "user_id")
 )

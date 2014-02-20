@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 class Activity(models.Model):
   # All possible activities
   name = models.CharField(max_length=200, unique=True)
-  userCreated = models.BooleanField()
+  userCreated = models.BooleanField(default=True)
   user = models.ForeignKey(User)
   no = models.PositiveIntegerField()
 
@@ -44,6 +44,7 @@ class ActivityAtTime(models.Model):
   activity = models.ForeignKey(Activity)
   timeStart = models.DateTimeField()
   timeStop = models.DateTimeField()
+  description = models.CharField(max_length=200, null=True, blank=True)
   
   def __unicode__(self):
     return u'%s %s %s' % (self.activity, self.timeStart, self.timeStop)
