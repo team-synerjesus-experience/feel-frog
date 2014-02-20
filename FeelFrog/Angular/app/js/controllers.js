@@ -18,6 +18,18 @@ angular.module('myApp.controllers', []).
 	  			{
 	  				time:'14/02/25 17:00-18:00',
 	  				activities: ['School', 'Social', 'loling'],
+	  				mood:'4',
+	  			},
+
+	  			{
+	  				time:'14/02/25 17:00-18:00',
+	  				activities: ['School', 'Social', 'loling'],
+	  				mood:'3',
+	  			},
+
+	  			{
+	  				time:'14/02/25 17:00-18:00',
+	  				activities: ['School', 'Social', 'loling'],
 	  				mood:'2',
 	  			},
 
@@ -60,16 +72,22 @@ angular.module('myApp.controllers', []).
 
   		$s.getColor = function(interval){
   			if(interval.mood==5){
-  			return "{backgroundColor:'blue'}";
+  			return "{backgroundColor:'#39E539'}";
+  			};
+  			if(interval.mood==4){
+  			return "{backgroundColor:'#67E567'}";
   			}
-  			else return "{backgroundColor:'red'}";
+  			if(interval.mood==3){
+  			return "{backgroundColor:'#76FF9A'}";
+  			};
+  			if(interval.mood==2){
+  			return "{backgroundColor:'#76FFC4'}";
+  			};
+  			if(interval.mood==1){
+  			return "{backgroundColor:'#B4DFFF'}";
+  			};
+
   		};
-
-
-	  	if($s.displayInterval.mood==2){
-	  		$log.log($s.displayInterval.mood);
-	  	  $s.moodColor = "{backgroundColor:'blue'}";
-	  	}
 
 	}
 
