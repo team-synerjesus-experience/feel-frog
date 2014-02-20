@@ -5,7 +5,21 @@ body{
   font: 12px Arial, sans-serif;
   background-color:rgb(225, 235, 245)
 }
-
+#container{
+html, body, #container{ 
+height: 100%; 
+}
+body > #container{ 
+height: auto; min-height: 100%; 
+}
+}
+footer{
+clear: both;
+position: relative;
+z-index: 10;
+height: 3em;
+background-color:#adff2f;
+}
 #head_frog{
   background-color:#0099FF;
   text-align: center;
