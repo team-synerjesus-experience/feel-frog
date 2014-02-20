@@ -4,8 +4,13 @@
 
 
 angular.module('myApp.directives', []).
-  directive('appVersion', ['version', function(version) {
-    return function(scope, elm, attrs) {
-      elm.text(version);
-    };
-  }]);
+
+directive('setMoodColor', function($scope) {
+ 
+      function link(scope, element, attrs) {
+        element.style.backgroundColor="blue";
+        function updateTime() {
+        element.style.backgroundColor="blue";
+        };
+    }
+});
