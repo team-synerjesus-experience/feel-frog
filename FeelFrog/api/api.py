@@ -69,16 +69,20 @@ def query_prediction(start, end):
 		clf = train(decoded)
 	except ValueError:
 		response = {
-			'msg' : 'Insufficient Data',
-			'code': 101
+			'msg'    : 'Insufficient Data',
+			'code'   : 101,
+			'status' : 'failure'
 		}
 
-		return jsonify( { 'error' : response } ), 418
+		return jsonify( response ), 418
 
 	response = {
-		'value': clf.predict(features)[0] # get predicting vector
+		'msg'    : '',
+		'status' : 'success',
+		'code'   : 0,
+		'value'  : clf.predict(features)[0] # get predicting vector
 	}
-	return jsonify( { 'prediction': response } ), 201
+	return jsonify( response ), 201
 
 @app.route('/v0/get/activites/between/<start>/and/<end>', methods = ['POST'])
 def get_activities(start, end):
@@ -89,14 +93,20 @@ def get_activities(start, end):
 	end_date = date_parse(end)
 
 	if start_date is None or end_date is None:
-		abort(400)
+		response = {
+			'status' : 'failure',
+			'code'   : 105,
+			'msg'    : 'Incorrect Date Format'
+		}
+
+		return jsonify(response), 418
 
 	db = get_db()
 
-	vector_cur = db.execute("""SELECT 
+	activities = db.execute("""SELECT 
 									moodEntry_activity.no
-									moodEntry_activityattime.timestart
-									moodEntry_activityattime.timestop
+									moodEntry_activityattime.timeStart
+									moodEntry_activityattime.timeStop
 									moodEntry_activityattime.description
 								FROM 
 									moodEntry_activityattime 
@@ -108,6 +118,8 @@ def get_activities(start, end):
 							[start_date.isoformat(' '), end_date.isoformat(' '), start_date.isoformat(' '), end_date.isoformat(' ')])
 	
 
+	# this needs finished, get the activities into interval form
+
 	response = {
 		'1hour' : intervals_one,
 		'4hour' : intervals_four,
@@ -117,33 +129,102 @@ def get_activities(start, end):
 	}
 	return jsonify( { 'intervals' : response } ), 201
 
-@app.route('/v0/add/activity', methods = ['POST'])
-def add_activity():
-	if not request.json or not 'user' in request.json or not 'name' in request.json or not 'category' in request.json or not 'start' in request.json or not 'end' in request.json:
+@app.route('/v0/add/activity/from/<start>/to/<end>', methods = ['POST'])
+def add_activity(start, end):
+	if not request.json or not 'user' in request.json or not 'category' in request.json:
 	   	abort(400)
 
-	# compose db request (output success_state)
+	start_date = date_parse(start)
+	end_date = date_parse(end)
+
+	if start_date is None or end_date is None:
+		response = {
+			'status' : 'failure',
+			'code'   : 105,
+			'msg'    : 'Incorrect Date Format'
+		}
+
+		return jsonify(response), 418
+
+	no = request.json['category']
+
+	desc = request.json['desc'] if 'desc' in request.json else ''
+
+	if len(desc) >= 200:
+		response = {
+			'status' : 'failure',
+			'code'   : 104,
+			'msg'    : 'Description Too Long'
+		}
+
+		return jsonify( response ), 418
+
+	db = get_db()
+
+	activity_id = db.execute('select id from moodEntry_activity where no = ?', [no]).fetchone()
+
+	# should check for existence; we assume it does at the moment
+
+	app.logger.debug(activity_id[0])
+
+	db.execute(""""insert into moodEntry_activityattime (user_id, activity_id, timeStart, timeStop, description) 
+				   values (2, ?, datetime(?), datetime(?), ?)""", 
+				   [activity_id[0], start_date.isoformat(' '), end_date.isoformat(' '), desc])
+	
+	db.commit()
 
 	response = {
-		'success' : success_state
+		'status' : 'success',
+		'code'   : 0,
+		'msg'    : ''
 	}
 	return jsonify(response), 201 # change 201 depending on success_state
 
-@app.route('/v0/add/mood', methods = ['POST'])
-def add_mood():
-	if not request.json or not 'user' in request.json or not 'mood' in request.json or not 'time' in request.json:
+@app.route('/v0/add/mood/at/<time>', methods = ['POST'])
+def add_mood(time):
+	if not request.json or not 'user' in request.json or not 'mood' in request.json:
 	   	abort(400)
 
+	time_date = date_parse_ws(time)
+
+	if time_date is None:
+		response = {
+			'status' : 'failure',
+			'code'   : 105,
+			'msg'    : 'Incorrect Date Format'
+		}
+
+		return jsonify(response), 418
 	# compose db request (output success_state)
 
-		# get most recent mood time 
-		# store mood
+	db = get_db()
+
+	most_recent_mood = db.execute("select MAX(time) AS max_time from moodEntry_moodattime").fetchone()
+
+	app.logger.debug(most_recent_mood[0])
+
+	mrm_time = date_parse_db(most_recent_mood[0]) # we can assume this isn't None since it's not null in the db
+
+	if mrm_time >= time_date:
+		response = {
+			'status' : 'failure',
+			'code'   : 106,
+			'msg'    : 'Invalid Time (Attempting to time-travel)'
+		}
+
+		return jsonify(response), 418
+
+	db.execute("insert into moodEntry_moodattime (mood, time) values (?, datetime(?))", [request.json['mood'], time_date.isoformat(' ')])
+	db.commit()
+
 		# get all numbers of activites between mood times
 		# create/encode vector
 		# store vector
 
 	response = {
-		'success' : success_state
+		'status' : 'success',
+		'code'   : 0,
+		'msg'    : ''
 	}
 	return jsonify(response), 201 # change 201 depending on success_state
 
@@ -151,6 +232,18 @@ def add_mood():
 def date_parse(input):
 		try:
 			return datetime.strptime(input, "%Y%m%d%H%M")
+		except ValueError:
+			return None
+
+def date_parse_ws(input):
+		try:
+			return datetime.strptime(input, "%Y%m%d%H%M%S")
+		except ValueError:
+			return None
+
+def date_parse_db(input):
+		try:
+			return datetime.strptime(input, "%Y-%m-%d %H:%M:%S")
 		except ValueError:
 			return None
 
