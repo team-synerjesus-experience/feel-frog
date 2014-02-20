@@ -10,7 +10,7 @@ angular.module('myApp', [
   'myApp.controllers'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/input', {templateUrl: 'partials/input.html', controller: 'MyCtrl2'});
-  $routeProvider.when('/output', {templateUrl: 'partials/output.html', controller: 'MyCtrl2'});
+  $routeProvider.when('/input', {templateUrl: 'partials/input.html', controller: 'MyCtrl1'});
+  $routeProvider.when('/output', {templateUrl: 'partials/output.html', controller: 'MyCtrl1'});
   $routeProvider.otherwise({redirectTo: '/input'});
 }]);
