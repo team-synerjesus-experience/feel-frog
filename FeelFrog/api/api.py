@@ -91,6 +91,21 @@ def get_activities(start, end):
 	if start_date is None or end_date is None:
 		abort(400)
 
+	db = get_db()
+
+	vector_cur = db.execute("""SELECT 
+									moodEntry_activity.no
+									moodEntry_activityattime.timestart
+									moodEntry_activityattime.timestop
+									moodEntry_activityattime.description
+								FROM 
+									moodEntry_activityattime 
+									INNER JOIN moodEntry_activity
+									ON moodEntry_activityattime.activity_id = moodEntry_activity.id
+								WHERE 
+									(moodEntry_activityattime.timeStart BETWEEN datetime(?) AND datetime(?)) OR
+									(moodEntry_activityattime.timeStop BETWEEN datetime(?) AND datetime(?))""",
+							[start_date.isoformat(' '), end_date.isoformat(' '), start_date.isoformat(' '), end_date.isoformat(' ')])
 	
 
 	response = {
