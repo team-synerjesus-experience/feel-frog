@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from moodEntry.models import *
 
 
-admin.site.register(MyUser)
 admin.site.register(Activity)
 admin.site.register(Activities)
 admin.site.register(MoodAtTime)
