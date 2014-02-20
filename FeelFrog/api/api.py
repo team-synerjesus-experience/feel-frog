@@ -103,10 +103,10 @@ def get_activities(start, end):
 
 	db = get_db()
 
-	vector_cur = db.execute("""SELECT 
+	activities = db.execute("""SELECT 
 									moodEntry_activity.no
-									moodEntry_activityattime.timestart
-									moodEntry_activityattime.timestop
+									moodEntry_activityattime.timeStart
+									moodEntry_activityattime.timeStop
 									moodEntry_activityattime.description
 								FROM 
 									moodEntry_activityattime 
@@ -117,6 +117,8 @@ def get_activities(start, end):
 									(moodEntry_activityattime.timeStop BETWEEN datetime(?) AND datetime(?))""",
 							[start_date.isoformat(' '), end_date.isoformat(' '), start_date.isoformat(' '), end_date.isoformat(' ')])
 	
+
+	# this needs finished, get the activities into interval form
 
 	response = {
 		'1hour' : intervals_one,
@@ -169,6 +171,8 @@ def add_activity(start, end):
 				   values (2, ?, datetime(?), datetime(?), ?)""", 
 				   [activity_id[0], start_date.isoformat(' '), end_date.isoformat(' '), desc])
 	
+	db.commit()
+
 	response = {
 		'status' : 'success',
 		'code'   : 0,
@@ -181,7 +185,7 @@ def add_mood(time):
 	if not request.json or not 'user' in request.json or not 'mood' in request.json:
 	   	abort(400)
 
-	time_date = date_parse(time)
+	time_date = date_parse_ws(time)
 
 	if time_date is None:
 		response = {
@@ -195,19 +199,32 @@ def add_mood(time):
 
 	db = get_db()
 
-	most_recent_mood = db.execute("select mood, time from moodEntry_moodattime where time >= datetime(?)", [time_date.isoformat(' ')]).fetchone()
+	most_recent_mood = db.execute("select MAX(time) AS max_time from moodEntry_moodattime").fetchone()
 
 	app.logger.debug(most_recent_mood[0])
-	app.logger.debug(most_recent_mood[1])
 
-		# get most recent mood time 
-		# store mood
+	mrm_time = date_parse_db(most_recent_mood[0]) # we can assume this isn't None since it's not null in the db
+
+	if mrm_time >= time_date:
+		response = {
+			'status' : 'failure',
+			'code'   : 106,
+			'msg'    : 'Invalid Time (Attempting to time-travel)'
+		}
+
+		return jsonify(response), 418
+
+	db.execute("insert into moodEntry_moodattime (mood, time) values (?, datetime(?))", [request.json['mood'], time_date.isoformat(' ')])
+	db.commit()
+
 		# get all numbers of activites between mood times
 		# create/encode vector
 		# store vector
 
 	response = {
-		'success' : success_state
+		'status' : 'success',
+		'code'   : 0,
+		'msg'    : ''
 	}
 	return jsonify(response), 201 # change 201 depending on success_state
 
@@ -215,6 +232,18 @@ def add_mood(time):
 def date_parse(input):
 		try:
 			return datetime.strptime(input, "%Y%m%d%H%M")
+		except ValueError:
+			return None
+
+def date_parse_ws(input):
+		try:
+			return datetime.strptime(input, "%Y%m%d%H%M%S")
+		except ValueError:
+			return None
+
+def date_parse_db(input):
+		try:
+			return datetime.strptime(input, "%Y-%m-%d %H:%M:%S")
 		except ValueError:
 			return None
 
