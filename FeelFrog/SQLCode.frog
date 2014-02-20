@@ -1,0 +1,13 @@
+#################################################
+# SQL code for getting stuff from the database. #
+# database, Just living in the database Woah-oh # 
+#################################################
+
+getVectors()
+SELECT vector FROM ActivityVector
+- retrieves the vectors from the ActivityVector table
+
+getActivities(startpoint, endpoint)
+SELECT activity,timeStart,timeStop FROM ActivityAtTime 
+WHERE (timeStart BETWEEN startpoint AND endpoint) OR
+(timeStop BETWEEN startpoint AND endpoint)

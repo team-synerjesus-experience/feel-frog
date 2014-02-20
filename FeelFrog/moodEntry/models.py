@@ -1,24 +1,25 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Activity(models.Model):
-  # All possible activities
-  name = models.CharField(max_length=200, unique=True)
-  userCreated = models.BooleanField()
-  
-  def __unicode__(self):
-    return self.name
 
 class MyUser(models.Model):
   # The custom user model
   user = models.OneToOneField(User)
-  real_name = models.CharField(max_length=200)
-  unique1 = models.ForeignKey(Activity, related_name="Unique 1")
-  unique2 = models.ForeignKey(Activity, related_name="Unique 2")
-  unique3 = models.ForeignKey(Activity, related_name="Unique 3")
+  name = models.CharField(max_length=30)
+  real_name = models.CharField(max_length=50)
 
   def __unicode__(self):
-    return self.user.username
+    return self.name
+
+class Activity(models.Model):
+  # All possible activities
+  name = models.CharField(max_length=200, unique=True)
+  userCreated = models.BooleanField()
+  user = models.ForeignKey(MyUser)
+  no = models.PositiveIntegerField()
+  
+  def __unicode__(self):
+    return self.name
 
 class Activities(models.Model):
   # The user's set of activities
