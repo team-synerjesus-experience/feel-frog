@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="css/app.css"/>
     <link rel="icon" type="image/png" href="img/Icon.png" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+          $(".button").addClass('inactive');
+          $(".button").first().removeClass('inactive');
+          $(".button").click(function() {
+            $(".button").addClass('inactive');
+            $(this).removeClass('inactive');
+            window.location.href;
+          });
+      });
+    </script>
   </head>
 
 
