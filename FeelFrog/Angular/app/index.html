@@ -8,23 +8,41 @@
   <link rel="icon" type="image/png" href="img/Icon.png" />
 </head>
 
-  <body>
-  235235235{{variable}}523523523
+  <body ng-controller="MyCtrl1">
     <header id="head_frog">
       <img alt="Think of a frog" border="0" src="img/top_banner.png">
     </header>
 
     <header class="header" id="nav" >
-      <a href="#/input" class="button"> Add entries</a>
+      <ul>
+        <li><a class="button" href="#/input">input</a></li>
+        <li><a class="button" href="#/output">output</a></li>
+        <li><a class="button" href="#/stats">Stats</a></li>
+        <li><a class="button" href="theEnd">Logout</a></li>
+      </ul>
+
+
+   <!--<a href="#/input" class="button"> Add entries</a>
       <a href="#/output" class="button"> Results</a>
-      <a href="logout" class="button"> Logout</a>    
+      <a href="logout" class="button"> Logout</a>    -->
+
+
+
     </header>
     <div ng-view> </div> 
 
-           <iframe src="https://www.google.com/calendar/embed?showNav=0&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%2399ff99&amp;src=giedriuszeb%40gmail.com&amp;color=%232952A3&amp;ctz=Europe%2FLondon" style=" border-width:0 " width="40%" height="600" float="right" frameborder="0" scrolling="no"></iframe>
-         
+    <div>
 
-        <!-- In production use:
+    </div>
+
+
+    <!--
+    <iframe src="https://www.google.com/calendar/embed?showNav=0&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%2399ff99&amp;src=giedriuszeb%40gmail.com&amp;color=%232952A3&amp;ctz=Europe%2FLondon" style=" border-width:0 " width="40%" height="600" float="right" frameborder="0" scrolling="no"></iframe>
+    -->
+
+
+    <!-- 
+         In production use:
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
         -->
     <script src="lib/angular/angular.js"></script>
