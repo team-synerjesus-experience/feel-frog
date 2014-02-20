@@ -55,7 +55,6 @@ html, body{
 
 #nav{
   width:100%;
-  padding-left: 230px;
   padding-bottom: 10px;
   padding-top: 10px;
   background-color: #387919; 
@@ -105,7 +104,7 @@ input[type=text]{
   font-style:normal;
   height:35px;
   line-height:35px;
-  width:100px;
+  width:150px;
   text-decoration:none;
   text-align:center;
   margin-right:10px;
@@ -120,11 +119,19 @@ input[type=text]{
   box-shadow:inset 0px -3px 3px -3px #333;
 }
 
-li > .intervals{
-}
-
 .skyblue {
   background-color:#00BFFF;
+}
+
+.intervals {
+  width:48.8%;
+  margin-left:0;
+  margin-right:0;
+  padding:0;
+}
+
+ul.header {
+  padding:0;
 }
 
 #times {
@@ -137,9 +144,11 @@ li > .intervals{
   margin-right: 10px;
 }
 .interval {
-  -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+ /* -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
   -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
   box-shadow:inset 0px 1px 0px 0px #ffffff;
+  */
+  margin-top:6px;
   background-color:#ededed;
   -webkit-border-top-left-radius:6px;
   -moz-border-radius-topleft:6px;
@@ -154,7 +163,7 @@ li > .intervals{
   -moz-border-radius-bottomleft:6px;
   border-bottom-left-radius:6px;
   text-indent:0;
-  border:1px solid #dcdcdc;
+  /*border:1px solid #dcdcdc;*/
   display:inline-block;
   color:#777777;
   font-family:arial;

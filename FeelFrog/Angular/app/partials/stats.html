@@ -1,4 +1,14 @@
   <div class="content">
+    <script>
+      $(document).ready(function() {
+          $(".intervals").addClass('inactive');
+          $(".intervals").first().removeClass('inactive');
+          $(".intervals").click(function() {
+            $(".intervals").addClass('inactive');
+            $(this).removeClass("inactive");
+            });
+      });
+    </script>
   <h2>
   Choose an interval
   </h2>
