@@ -1,6 +1,12 @@
-from flask import Flask, request, g 
+from flask import Flask, request, g, abort, jsonify
+import sqlite3
 from correlations import correlation, train
-import datetime
+from datetime import datetime
+import os
+from math import isnan
+from vectorCode import decodeVect, encodeVect
+from numpy import std
+
 app = Flask(__name__)
 
 @app.route('/v0/get/correlation', methods = ['POST'])
@@ -8,37 +14,70 @@ def query_correlation():
 	if not request.json or not 'user' in request.json:
 		abort(400)
 
-	# query database for vectors
+	db = get_db()
+	cursor = db.execute("select vector from moodEntry_activityvector")
+	vecs = cursor.fetchall()
+	packed_vecs = map(lambda x: x[0], vecs)
+	decoded = map(decodeVect, packed_vecs)
+	correls = [correlation(x, decoded) for x in xrange(10)]
+	mood_dev = std(map(lambda x: x[10], decoded))
 
-	response = {
-		'values': [correlation(i, t) for i in xrange(10)]
-	}
-	return jsonify( { 'correlations': response } ), 201
+	json_data = map(lambda x: { 
+			'status': 'success' if not isnan(x) else 'failure',
+			'msg'   : '' if not isnan(x) else 'Mood Unchanging' if mood_dev == 0 else 'Event Always Occurs',
+			'code'  : 0 if not isnan(x) else 102 if mood_dev == 0 else 103,
+			'value' : x}, correls)
+
+	return jsonify( { 'correlations': json_data } ), 201
 
 @app.route('/v0/get/prediction/for/<start>/to/<end>', methods = ['POST'])
-def query_prediction():
-	if not request.json or
-	   not 'user' in request.json:
+def query_prediction(start, end):
+	if not request.json or not 'user' in request.json:
 		abort(400)
 
 	start_date = date_parse(start)
 	end_date = date_parse(end)
 
-	# how do we get the vector we're trying to predict
+	if start_date is None or end_date is None:
+		abort(400)
 
-	# query database for vectors
+	db = get_db()
 
-	clf = train(vectors) # make vectors exist
+	vector_cur = db.execute("""SELECT 
+									moodEntry_activity.no
+								FROM 
+									moodEntry_activityattime 
+									INNER JOIN moodEntry_activity
+									ON moodEntry_activityattime.activity_id = moodEntry_activity.id
+								WHERE 
+									(moodEntry_activityattime.timeStart BETWEEN datetime(?) AND datetime(?)) OR
+									(moodEntry_activityattime.timeStop BETWEEN datetime(?) AND datetime(?))""",
+							[start_date.isoformat(' '), end_date.isoformat(' '), start_date.isoformat(' '), end_date.isoformat(' ')])
+
+
+
+
+	cursor = db.execute("select vector from moodEntry_activityvector")
+	vecs = cursor.fetchall()
+
+	try:
+		clf = train(vecs)
+	except ValueError:
+		response = {
+			'msg' : 'Insufficient Data',
+			'code': 101
+		}
+
+		return jsonify( { 'error' : response } ), 418
 
 	response = {
 		'value': clf.predict(features) # get predicting vector
 	}
 	return jsonify( { 'prediction': response } ), 201
 
-@app.route('/v0/get/activites/between/<start>/and/<end>', method = ['POST'])
+@app.route('/v0/get/activites/between/<start>/and/<end>', methods = ['POST'])
 def get_activities(start, end):
-	if not request.json or
-	   not 'user' in request.json: # complete 
+	if not request.json or not 'user' in request.json: # complete 
 	   	abort(400)
 
 	start_date = date_parse(start)
@@ -58,14 +97,9 @@ def get_activities(start, end):
 	}
 	return jsonify( { 'intervals' : response } ), 201
 
-@app.route('/v0/add/activity', method = ['POST'])
+@app.route('/v0/add/activity', methods = ['POST'])
 def add_activity():
-	if not request.json or
-	   not 'user' in request.json or
-	   not 'name' in request.json or
-	   not 'category' in request.json or
-	   not 'start' in request.json or
-	   not 'end' in request.json:
+	if not request.json or not 'user' in request.json or not 'name' in request.json or not 'category' in request.json or not 'start' in request.json or not 'end' in request.json:
 	   	abort(400)
 
 	# compose db request (output success_state)
@@ -75,12 +109,9 @@ def add_activity():
 	}
 	return jsonify(response), 201 # change 201 depending on success_state
 
-@app.route('/v0/add/mood', method = ['POST'])
+@app.route('/v0/add/mood', methods = ['POST'])
 def add_mood():
-	if not request.json or
-	   not 'user' in request.json or
-	   not 'mood' in request.json or
-	   not 'time' in request.json:
+	if not request.json or not 'user' in request.json or not 'mood' in request.json or not 'time' in request.json:
 	   	abort(400)
 
 	# compose db request (output success_state)
@@ -118,5 +149,13 @@ def close_db(error):
 	if hasattr(g, 'sqlite_db'):
 		g.sqlite_db.close()
 
-if __name__ == '__main__'
+if __name__ == '__main__':	
+	app.config.update(dict(
+    	DATABASE=os.path.join(app.root_path, 'db.sqlite3'),
+    	DEBUG=True,
+    	SECRET_KEY='development key',
+    	USERNAME='admin',
+    	PASSWORD='default'
+	))
+
 	app.run()
