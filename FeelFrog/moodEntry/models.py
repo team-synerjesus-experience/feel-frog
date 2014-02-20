@@ -62,12 +62,6 @@ class ActivityVector(models.Model):
   def __unicode__(self):
     return u'%i' % (self.vector)
 
-  def getVec(self):
-    vect = []
-    for x in range(0, 9):
-      vect.append(((self.vector)>>x)%2)
-    vect.append(((self.vector)>>10)%8)
-    return vect
 
 class MoodPredicted(models.Model):
   moodStart = models.ForeignKey(MoodAtTime, related_name="moodStart")
