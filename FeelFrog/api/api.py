@@ -55,13 +55,18 @@ def query_prediction(start, end):
 							[start_date.isoformat(' '), end_date.isoformat(' '), start_date.isoformat(' '), end_date.isoformat(' ')])
 
 
+	feature_unencoded = map(lambda x: x[0], vector_cur.fetchall())
+	app.logger.debug(feature_unencoded)
 
+	features = [1 if any(map(lambda x: x == i, feature_unencoded)) else 0 for i in xrange(10)]
 
 	cursor = db.execute("select vector from moodEntry_activityvector")
 	vecs = cursor.fetchall()
+	packed_vecs = map(lambda x: x[0], vecs)
+	decoded = map(decodeVect, packed_vecs)
 
 	try:
-		clf = train(vecs)
+		clf = train(decoded)
 	except ValueError:
 		response = {
 			'msg' : 'Insufficient Data',
@@ -71,7 +76,7 @@ def query_prediction(start, end):
 		return jsonify( { 'error' : response } ), 418
 
 	response = {
-		'value': clf.predict(features) # get predicting vector
+		'value': clf.predict(features)[0] # get predicting vector
 	}
 	return jsonify( { 'prediction': response } ), 201
 
@@ -86,7 +91,7 @@ def get_activities(start, end):
 	if start_date is None or end_date is None:
 		abort(400)
 
-	# get intervals out
+	
 
 	response = {
 		'1hour' : intervals_one,
