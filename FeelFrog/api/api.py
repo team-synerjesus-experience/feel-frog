@@ -75,6 +75,12 @@ def add_mood():
 
 	# compose db request (output success_state)
 
+		# get most recent mood time 
+		# store mood
+		# get all numbers of activites between mood times
+		# create/encode vector
+		# store vector
+
 	response = {
 		'success' : success_state
 	}
