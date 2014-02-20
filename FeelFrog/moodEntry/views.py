@@ -5,8 +5,6 @@ from django.conf import settings
 from moodEntry.models import *
 
 
-if not settings.configured:
-	settings.configure(myapp_defaults, DEBUG=True)
 
 def getMood(request):
 	latest_mood = MoodAtTime.objects.order_by('-time')[0]
