@@ -10,6 +10,18 @@ html, body{
   padding:0;
   height:100%;
 }
+
+.size{
+  width: 50%;
+}
+
+.triple{
+  width: 33%;
+}
+.othertriple{
+  width: 30%;
+}
+
 #container{
   min-height:100%;
   position:relative;
@@ -31,6 +43,10 @@ html, body{
 
 .right{
   float:right;
+}
+
+.middle{
+  float:middle;
 }
 
 .left{
@@ -198,4 +214,13 @@ ul.header {
  */
 .cf {
     *zoom: 1;
+}
+
+.smallbox {
+  height:10px;
+}
+
+#graph{
+  width: 450px;
+  height: 200px;
 }
