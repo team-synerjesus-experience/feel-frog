@@ -12,7 +12,7 @@
           str = window.location.href.split("/");
           $(".button").addClass('inactive');
           $(".button").each(function() {
-            if ($(this).text().toLowerCase() == str[str.length-1]) {
+            if ($(this).text().toLowerCase() == str[str.length-1] && !($(this).hasClass('intervals'))) {
               $(this).removeClass('inactive');
             }
           });
