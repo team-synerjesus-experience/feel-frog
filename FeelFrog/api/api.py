@@ -42,7 +42,7 @@ def get_vector(start, end):
 								WHERE 
 									(moodEntry_activityattime.timeStart BETWEEN datetime(?) AND datetime(?)) OR
 									(moodEntry_activityattime.timeStop BETWEEN datetime(?) AND datetime(?))""",
-							[start_date.isoformat(' '), end_date.isoformat(' '), start_date.isoformat(' '), end_date.isoformat(' ')])
+							[start.isoformat(' '), end.isoformat(' '), start.isoformat(' '), end.isoformat(' ')])
 
 
 	feature_unencoded = map(lambda x: x[0], vector_cur.fetchall())
@@ -87,13 +87,13 @@ def query_predictions_batch():
 	}
 
 
-@app.route('/v0/get/prediction/for/<start>/to/<end>', methods = ['POST'])
-def query_prediction(start, end):
-	if not request.json or not 'user' in request.json:
+@app.route('/v0/get/prediction', methods = ['POST'])
+def query_prediction():
+	if not request.json or not 'user' in request.json or not 'timeStart' in request.json or not 'timeStop' in request.json:
 		abort(400)
 
-	start_date = date_parse(start)
-	end_date = date_parse(end)
+	start_date = date_parse(request.json['timeStart'])
+	end_date = date_parse(request.json['timeStop'])
 
 	if start_date is None or end_date is None:
 		abort(400)
@@ -125,13 +125,13 @@ def query_prediction(start, end):
 	}
 	return jsonify( response ), 201
 
-@app.route('/v0/get/activities/between/<start>/and/<end>', methods = ['POST'])
-def get_activities(start, end):
-	if not request.json or not 'user' in request.json: # complete 
+@app.route('/v0/get/activities/between', methods = ['POST'])
+def get_activities():
+	if not request.json or not 'user' in request.json or not 'timeStart' in request.json or not 'timeStop' in request.json: # complete 
 	   	abort(400)
 
-	start_date = date_parse(start)
-	end_date = date_parse(end)
+	start_date = date_parse(request.json['timeStart'])
+	end_date = date_parse(request.json['timeStop'])
 
 	if start_date is None or end_date is None:
 		response = {
@@ -169,15 +169,23 @@ def get_activities(start, end):
 	# 	'24hour': intervals_days
 	# }
 	# return jsonify( { 'intervals' : response } ), 201
-	return jsonify(activities)
+	next = activities.fetchall()
 
-@app.route('/v0/add/activity/from/<start>/to/<end>', methods = ['POST'])
-def add_activity(start, end):
-	if not request.json or not 'user' in request.json or not 'category' in request.json:
+	response = { 'activities' : map(lambda x: {
+										'no' : x[0],
+										'timeStart' : x[1],
+										'timeStop' : x[2],
+										'description' : x[3]
+									}, next) }
+	return jsonify(response)
+
+@app.route('/v0/add/activity', methods = ['POST'])
+def add_activity():
+	if not request.json or not 'user' in request.json or not 'category' in request.json or not 'timeStart' in request.json or not 'timeStop' in request.json:
 	   	abort(400)
 
-	start_date = date_parse(start)
-	end_date = date_parse(end)
+	start_date = date_parse(request.json['timeStart'])
+	end_date = date_parse(request.json['timeStop'])
 
 	if start_date is None or end_date is None:
 		response = {
@@ -223,12 +231,12 @@ def add_activity(start, end):
 	}
 	return jsonify(response), 201 # change 201 depending on success_state
 
-@app.route('/v0/add/mood/at/<time>', methods = ['POST'])
-def add_mood(time):
-	if not request.json or not 'user' in request.json or not 'mood' in request.json:
+@app.route('/v0/add/mood', methods = ['POST'])
+def add_mood():
+	if not request.json or not 'user' in request.json or not 'mood' in request.json or not 'time' in request.json:
 	   	abort(400)
 
-	time_date = date_parse_ws(time)
+	time_date = date_parse_ws(request.json['time'])
 
 	if time_date is None:
 		response = {
