@@ -124,7 +124,7 @@ input[type=text]{
 }
 
 .intervals {
-  width:48.8%;
+  width:30.8%;
   margin-left:0;
   margin-right:0;
   padding:0;
@@ -182,3 +182,20 @@ ul.header {
   top:1px;
 }
 /* This button was generated using CSSButtonGenerator.com */
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}

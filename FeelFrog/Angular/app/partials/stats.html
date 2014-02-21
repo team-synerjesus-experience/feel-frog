@@ -1,12 +1,12 @@
-  <div class="content">
+<div class="content cf">
     <script>
       $(document).ready(function() {
-          $(".intervals").addClass('inactive');
-          $(".intervals").first().removeClass('inactive');
-          $(".intervals").click(function() {
-            $(".intervals").addClass('inactive');
-            $(this).removeClass("inactive");
-            });
+        $(".intervals").addClass('inactive');
+        $(".intervals").first().removeClass('inactive');
+        $(".intervals").click(function() {
+        $(".intervals").addClass('inactive');
+        $(this).removeClass("inactive");
+        });
       });
     </script>
   <h2>
@@ -14,11 +14,12 @@
   </h2>
   <div class="left">
   	<ul class="header">
-        <li><a class="button intervals skyblue" ng-click="currentIntervals=data.interval_1h">1h</a></li>
-        <li><a class="button intervals skyblue" ng-click="currentIntervals=data.interval_6h">6h</a></li>
+        <li><a class="button intervals skyblue" ng-click="chooseIntervalGrain('interval_6h');create(6)">6h</a></li>	
+        <li><a class="button intervals skyblue" ng-click="chooseIntervalGrain('interval_12h');create(12)">12h</a></li>	
+        <li><a class="button intervals skyblue" ng-click="chooseIntervalGrain('interval_24h');create(24)">24h</a></li>	
     </ul>
 
-    <div id="times" class="skyblue" style="height:400px;width:300px;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    <div id="times" class="skyblue" style="height:420px;width:300px;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 
       <ul>
         <li class="interval" ng-style="{{getColor(interval)}}" ng-repeat="interval in currentIntervals" ng-click="chooseInterval(interval)" > {{interval.time}}</li>      
@@ -26,14 +27,14 @@
 
     </div>
 
-	<div id="inputs">
-	</div>
-  </div>
-    <div class="right" id="inputs">
-    <ul>
-    	<li ng-repeat="action in displayInterval.activities">{{action}}</li>
-    </ul>
+  	<div id="inputs">
     </div>
+  </div>
+  <div class="right" id="inputs" style="margin-top:30px;height:420px;width:300px;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    <ul>
+    	<a href="#/input" ng-repeat="line in displayedLines" class="interval"> {{line}} </a>
+    </ul>
+  </div>
 
     <p></p>
      
