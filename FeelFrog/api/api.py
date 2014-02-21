@@ -336,7 +336,7 @@ def close_db(error):
 
 if __name__ == '__main__':	
 	app.config.update(dict(
-    	DATABASE=os.path.join(app.root_path, 'db.sqlite3'),
+    	DATABASE=os.path.join(os.path.join(app.root_path, '..'), 'db.sqlite3'),
     	DEBUG=True,
     	SECRET_KEY='development key',
     	USERNAME='admin',
