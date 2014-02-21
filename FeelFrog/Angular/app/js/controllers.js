@@ -3,14 +3,14 @@
 /* Controllers */
 
 angular.module('myApp.controllers', []).
-  controller('MyCtrl1', ['$scope', '$log', '$http',function($s, $log, $http) {
+  controller('MyCtrl1', ['$scope', '$log', '$http', function($s, $log, $http) {
 
   		//mock data
 
   /*		$http.get('/someUrl').success(successCallback);{
   			$s.data=successCallback;
   		}
-*/
+*/		$log.log($http.defaults.headers.common);
   		 $s.data={
 
 
@@ -284,6 +284,7 @@ angular.module('myApp.controllers', []).
 	  				time:'14/02/25 12:00-18:00',
 	  				mood:'5',
 	  				activities: [
+	  				
 	  					{description:'studying in the university', //list should be ordered by time
 	  					timetag: '12.00-13.00'},
 
@@ -292,6 +293,79 @@ angular.module('myApp.controllers', []).
 
 	  					{description:'workout in gym',
 	  					timetag: '16.00-17.00'},
+	  				
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'working',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'workout in gym',
+	  					timetag: '16.00-17.00'},
+	  				
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'working',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'workout in gym',
+	  					timetag: '16.00-17.00'},
+	  				
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'working',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'workout in gym',
+	  					timetag: '16.00-17.00'},
+	  				
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'working',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'workout in gym',
+	  					timetag: '16.00-17.00'},
+	  				
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'working',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'workout in gym',
+	  					timetag: '16.00-17.00'},
+	  				
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'working',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'workout in gym',
+	  					timetag: '16.00-17.00'},
+	  				
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'working',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'workout in gym',
+	  					timetag: '16.00-17.00'},
+	  				
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'working',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'workout in gym',
+	  					timetag: '16.00-17.00'},
+
 	  				]
 	  			},
 
@@ -338,7 +412,7 @@ $s.currentIntervals=[];
 
   	//init
   		$s.chooseIntervalGrain('interval_6h');
-		$s.displayInterval=$s.data.interval_6h[0];
+		$s.displayInterval=$s.data.interval_6h[0].acti;
 		$s.intervalSize=6;
 		$s.create($s.intervalSize);
 		//
@@ -375,8 +449,9 @@ $s.currentIntervals=[];
         $s.timeStringMood=function(date, time){
         	$log.log($s.date);
         	var theString="";
-        	var x=date.replace(/-/g, "");
-        	var y=time.replace(/:/g, "");
+        	$log.log('1');
+        	var x=date.replace(/-/g, "");        	$log.log('2');
+        	var y=time.replace(/:/g, "");        	$log.log('3');
         	var z= x+y+"00";
         	$log.log(z);
         	return z;
@@ -384,7 +459,7 @@ $s.currentIntervals=[];
 	
         $s.timeStringAction=function(date, time){
         	$log.log($s.date);
-        	var theString="";
+        	var theString="";$log.log('1');
         	var x=date.replace(/-/g, "");
         	var y=time.replace(/:/g, "");
         	var z= x+y;
@@ -393,23 +468,23 @@ $s.currentIntervals=[];
         };
 
   		$s.submitMood = function(){
+  	$log.log('1');
+  			delete $http.defaults.headers.common['X-Requested-With'];
+  			$log.log('sadsad');
   			var obj={
   				mood:$s.mood,
-  				time:$s.timeStringMood($s.date0, $s.time1),
+  				time:$s.timeStringMood($s.date1, $s.time1),
   				user:2
   			};
   			var x=angular.toJson(obj);
-  			$log.log(x);
+  			$log.log($http.defaults.headers);
 
-			$http.post('http://feelfrog.catbrun.ch/api/v0/add/mood', obj, {
-                headers: { 'Content-Type': undefined },
-                transformRequest: function(data) { return data; }
-              }).success(function(data, status, headers, config) {
-
-              }).
-              error(function(data, status, headers, config) { 
-
-          })};
+			$http.post('http://localhost:5000/v0/add/mood', "obj", {
+				headers: {
+					   'Content-Type' : "application/x-www-form-urlencoded",
+				}
+                });
+             };
   		$s.submitAction = function(){
   			var obj={
   				timeStart:$s.timeStringAction($s.date2, $s.time2),
@@ -421,8 +496,10 @@ $s.currentIntervals=[];
   			var x=angular.toJson(obj);
   			$log.log(x);
 
-			$http.post('http://feelfrog.catbrun.ch/api/v0add/activity', obj, {
-                headers: { 'Content-Type': undefined },
+			$http.post('http://127.0.0.1:5000/v0/add/activity', obj, {
+                headers: { 'Content-Type': undefined ,
+            				'Access-Control-Allow-Origin':true},
+
                 transformRequest: function(data) { return data; }
               }).success(function(data, status, headers, config) {
 
