@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('myApp.controllers', []).
-  controller('MyCtrl1', ['$scope', '$log', '$http',function($s, $log) {
+  controller('MyCtrl1', ['$scope', '$log', '$http',function($s, $log, $http) {
 
   		//mock data
 
@@ -337,7 +337,7 @@ $s.currentIntervals=[];
   		};
 
   	//init
-  	$s.chooseIntervalGrain('interval_6h');
+  		$s.chooseIntervalGrain('interval_6h');
 		$s.displayInterval=$s.data.interval_6h[0];
 		$s.intervalSize=6;
 		$s.create($s.intervalSize);
@@ -368,10 +368,69 @@ $s.currentIntervals=[];
   			};
 
   		};
-  			
 
-	}
 
+      
+        
+        $s.timeStringMood=function(date, time){
+        	$log.log($s.date);
+        	var theString="";
+        	var x=date.replace(/-/g, "");
+        	var y=time.replace(/:/g, "");
+        	var z= x+y+"00";
+        	$log.log(z);
+        	return z;
+        };
+	
+        $s.timeStringAction=function(date, time){
+        	$log.log($s.date);
+        	var theString="";
+        	var x=date.replace(/-/g, "");
+        	var y=time.replace(/:/g, "");
+        	var z= x+y;
+        	$log.log(z);
+        	return z;
+        };
+
+  		$s.submitMood = function(){
+  			var obj={
+  				mood:$s.mood,
+  				date:$s.timeStringMood($s.date1, $s.time1),
+  				user:2
+  			};
+  			var x=angular.toJson(obj);
+  			$log.log(x);
+
+			$http.post('127.0.0.1:5000/v0/add/mood', obj, {
+                headers: { 'Content-Type': undefined },
+                transformRequest: function(data) { return data; }
+              }).success(function(data, status, headers, config) {
+
+              }).
+              error(function(data, status, headers, config) { 
+
+          })};
+  		$s.submitAction = function(){
+  			var obj={
+  				timeStart:$s.timeStringAction($s.date2, $s.time2),
+  				timeStop:$s.timeStringAction($s.date3, $s.time3),
+  				category:$s.category,
+  				description:$s.text,
+  				user:2
+  			};
+  			var x=angular.toJson(obj);
+  			$log.log(x);
+
+			$http.post('127.0.0.1:5000/v0/add/activity', obj, {
+                headers: { 'Content-Type': undefined },
+                transformRequest: function(data) { return data; }
+              }).success(function(data, status, headers, config) {
+
+              }).
+              error(function(data, status, headers, config) { 
+
+          })};
+}
 
 
 
