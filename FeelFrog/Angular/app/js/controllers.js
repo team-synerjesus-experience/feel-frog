@@ -32,6 +32,36 @@ angular.module('myApp.controllers', []).
 
 	  			{
 	  				time:'14/02/25 12:00-18:00',
+	  				mood:'5',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'5',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+
+	  			{
+	  				time:'14/02/25 12:00-18:00',
 	  				mood:'2',
 	  				activities: [
 	  					{description:'studying in the university', //list should be ordered by time
@@ -65,7 +95,7 @@ angular.module('myApp.controllers', []).
 
 	  			{
 	  				time:'14/02/25 12:00-18:00',
-	  				mood:'3',
+	  				mood:'1',
 	  				activities: [
 	  					{description:'studying in the university', //list should be ordered by time
 	  					timetag: '12.00-13.00'},
@@ -77,6 +107,21 @@ angular.module('myApp.controllers', []).
 	  					timetag: '16.00-17.00'},
 	  				]
 	  			},
+
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'3',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			}
 
 	  		],
 
@@ -111,16 +156,27 @@ angular.module('myApp.controllers', []).
 	  				]
 	  			},	  			
 
-	  		],
+	  		]
 
 
 
 	  };
+
+  		$s.create = function(size){
+  			var lines=[size];
+  			for (var i=0;i<size;i++){
+  				lines[i]=["add Item here"];
+  			$s.displayedLines=lines;
+  			}
+  		};
+
+
   	//init
 
-  		$s.currentIntervals=$s.data.interval_6h
-			$log.log($s.displayInterval);
-			$s.displayInterval=$s.data.interval_6h[0]
+  	$s.currentIntervals=$s.data.interval_6h
+		$s.displayInterval=$s.data.interval_6h[0]
+		$s.intervalSize=6;
+		$s.create($s.intervalSize);
 		//
 
 
@@ -128,9 +184,23 @@ angular.module('myApp.controllers', []).
   			$s.displayInterval=interval;
   		};
   		
-  		$log.log($s.displayInterval.mood);
-
-
+  		$s.chooseIntervalGrain = function(intervalGrain){
+  			$log.log("hi");
+  			  				$log.log(intervalGrain);
+  			var toAdd=[];
+  			var count=0;
+  			$log.log($s.data);
+  			for (x in $s.data.intervalGrain){
+  			  				$log.log("dsasaasd");	
+  				$log.log(intervalGrain);
+  				if (count==12) break;
+  				toAdd=toAdd.push(x);
+  				count++;
+  			}
+  			$log.log("woah");
+  			$log.log(toAdd);
+  			$s.currentIntervals=toAdd;
+  		};
 
   		$s.getColor = function(interval){
   			if(interval.mood==5){
@@ -150,6 +220,7 @@ angular.module('myApp.controllers', []).
   			};
 
   		};
+  			
 
 	}
 
