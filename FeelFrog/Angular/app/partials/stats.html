@@ -1,64 +1,40 @@
-<<<<<<< HEAD
-  <div class="content">
+<div class="content cf">
     <script>
       $(document).ready(function() {
-          $(".intervals").addClass('inactive');
-          $(".intervals").first().removeClass('inactive');
-          $(".intervals").click(function() {
-            $(".intervals").addClass('inactive');
-            $(this).removeClass("inactive");
-            });
+        $(".intervals").addClass('inactive');
+        $(".intervals").first().removeClass('inactive');
+        $(".intervals").click(function() {
+        $(".intervals").addClass('inactive');
+        $(this).removeClass("inactive");
+        });
       });
     </script>
   <h2>
-=======
-  <div class="content cf">
-
-  <div class="left">
-    <h2>
->>>>>>> aff1a90561e7001a338cb75989cb018d31a075c4
   Choose an interval
   </h2>
+  <div class="left">
   	<ul class="header">
-<<<<<<< HEAD
-        <li><a class="button intervals skyblue" ng-click="currentIntervals=data.interval_1h">1h</a></li>
-        <li><a class="button intervals skyblue" ng-click="currentIntervals=data.interval_6h">6h</a></li>
+        <li><a class="button intervals skyblue" ng-click="chooseIntervalGrain('interval_6h');create(6)">6h</a></li>	
+        <li><a class="button intervals skyblue" ng-click="chooseIntervalGrain('interval_12h');create(12)">12h</a></li>	
+        <li><a class="button intervals skyblue" ng-click="chooseIntervalGrain('interval_24h');create(24)">24h</a></li>	
     </ul>
 
-    <div id="times" class="skyblue" style="height:400px;width:300px;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-=======
-        <li><a class="button small-button" ng-click="chooseIntervalGrain('interval_6h')">6h</a></li>	
-        <li><a class="button small-button" ng-click="currentIntervals=data.interval_6h;create(6)">6h</a></li>
-        <li><a class="button small-button" ng-click="currentIntervals=data.interval_12h; create(12)">12h</a></li>
-        <li><a class="button small-button" ng-click="currentIntervals=data.interval_24h; create(24)">24h</a></li>
-    </ul>
-
-
-
-
-    <div  style="height:400px;width:300px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
->>>>>>> aff1a90561e7001a338cb75989cb018d31a075c4
+    <div id="times" class="skyblue" style="height:420px;width:300px;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 
       <ul>
         <li class="interval" ng-style="{{getColor(interval)}}" ng-repeat="interval in currentIntervals" ng-click="chooseInterval(interval)" > {{interval.time}}</li>      
       </ul>
 
     </div>
-  </div>
-    <div class="right" id="inputs">
 
-      <div class="left">
-          <ul class="header">
-        <h1> Activities in the period of time {{intervalSize}}</h1>
-    </ul>
-        <div  style="height:400px;width:300px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
-          <ul>
-            <li ng-repeat="line in displayedLines" class="interval"> {{line}} </li>
-            <!--<li ng-repeat="activity in displayInterval.activities"> Time: {{activity.timetag}}. <br>Activity:{{activity.description}}. </li>      -->
-          </ul>
-        </div>
-      </div>
+  	<div id="inputs">
     </div>
+  </div>
+  <div class="right" id="inputs" style="margin-top:30px;height:420px;width:300px;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    <ul>
+    	<a href="#/input" ng-repeat="line in displayedLines" class="interval"> {{line}} </a>
+    </ul>
+  </div>
 
     <p></p>
      

@@ -115,7 +115,6 @@ input[type=text]{
   top:1px;
 }
 
-<<<<<<< HEAD
 .inactive {
   box-shadow:inset 0px -3px 3px -3px #333;
 }
@@ -125,7 +124,7 @@ input[type=text]{
 }
 
 .intervals {
-  width:48.8%;
+  width:30.8%;
   margin-left:0;
   margin-right:0;
   padding:0;
@@ -137,10 +136,6 @@ ul.header {
 
 #times {
   border:0;
-=======
-.small-button{
-  width:50px;
->>>>>>> aff1a90561e7001a338cb75989cb018d31a075c4
 }
 
 #inputs {
@@ -186,11 +181,7 @@ ul.header {
   position:relative;
   top:1px;
 }
-<<<<<<< HEAD
 /* This button was generated using CSSButtonGenerator.com */
-=======
-
-
 .cf:before,
 .cf:after {
     content: " "; /* 1 */
@@ -208,4 +199,3 @@ ul.header {
 .cf {
     *zoom: 1;
 }
->>>>>>> aff1a90561e7001a338cb75989cb018d31a075c4

@@ -92,7 +92,161 @@ angular.module('myApp.controllers', []).
 	  					timetag: '16.00-17.00'},
 	  				]
 	  			},
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
 
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  			
 	  			{
 	  				time:'14/02/25 12:00-18:00',
 	  				mood:'1',
@@ -161,7 +315,7 @@ angular.module('myApp.controllers', []).
 
 
 	  };
-
+$s.currentIntervals=[];
   		$s.create = function(size){
   			var lines=[size];
   			for (var i=0;i<size;i++){
@@ -170,11 +324,21 @@ angular.module('myApp.controllers', []).
   			}
   		};
 
+  		$s.chooseIntervalGrain = function(intervalGrain){
+  			//  				$log.log(intervalGrain);
+  		   	$s.currentIntervals=[];
+  				var count=0;
+  				for (var x in $s.data[intervalGrain]){
+  				if (count==11) break
+  				$s.currentIntervals.push($s.data[intervalGrain][x]);
+  				count++;
+  			}
+  			$s.currentIntervals=$s.currentIntervals;
+  		};
 
   	//init
-
-  	$s.currentIntervals=$s.data.interval_6h
-		$s.displayInterval=$s.data.interval_6h[0]
+  	$s.chooseIntervalGrain('interval_6h');
+		$s.displayInterval=$s.data.interval_6h[0];
 		$s.intervalSize=6;
 		$s.create($s.intervalSize);
 		//
@@ -184,23 +348,7 @@ angular.module('myApp.controllers', []).
   			$s.displayInterval=interval;
   		};
   		
-  		$s.chooseIntervalGrain = function(intervalGrain){
-  			$log.log("hi");
-  			  				$log.log(intervalGrain);
-  			var toAdd=[];
-  			var count=0;
-  			$log.log($s.data);
-  			for (x in $s.data.intervalGrain){
-  			  				$log.log("dsasaasd");	
-  				$log.log(intervalGrain);
-  				if (count==12) break;
-  				toAdd=toAdd.push(x);
-  				count++;
-  			}
-  			$log.log("woah");
-  			$log.log(toAdd);
-  			$s.currentIntervals=toAdd;
-  		};
+
 
   		$s.getColor = function(interval){
   			if(interval.mood==5){
