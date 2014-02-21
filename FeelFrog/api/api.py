@@ -365,19 +365,21 @@ def get_n_intervals():
 
 	return jsonify( { 'intervals' : map(lambda x: { 'interval': x }, intervals) } ), 201
 
-# Uses format string %Y%m%d%H%M
+# Standard time format parser
 def date_parse(input):
 		try:
 			return datetime.strptime(input, "%Y%m%d%H%M")
 		except ValueError:
 			return None
 
+# For parsing more fine-grained time formats
 def date_parse_ws(input):
 		try:
 			return datetime.strptime(input, "%Y%m%d%H%M%S")
 		except ValueError:
 			return None
 
+# For parsing time formats stored in the database
 def date_parse_db(input):
 		try:
 			return datetime.strptime(input, "%Y-%m-%d %H:%M:%S")
@@ -402,10 +404,10 @@ def close_db(error):
 if __name__ == '__main__':	
 	app.config.update(dict(
     	DATABASE=os.path.join(os.path.join(app.root_path, '..'), 'db.sqlite3'),
-    	DEBUG=True,
+    	DEBUG=False,
     	SECRET_KEY='development key',
     	USERNAME='admin',
     	PASSWORD='default'
 	))
 
-	app.run()
+	app.run(host='0.0.0.0')
