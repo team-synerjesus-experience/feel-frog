@@ -315,6 +315,622 @@ angular.module('myApp.controllers', []).
 
 
 	  };
+	  
+
+  		//mock data
+
+  /*		$http.get('/someUrl').success(successCallback);{
+  			$s.data=successCallback;
+  		}
+*/
+  		 $s.data={
+
+
+	  		interval_6h:[
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'5',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'5',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'5',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'2',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			}
+
+	  		],
+
+	  		interval_12h:[
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  				  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+	  			
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'1',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'3',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'studying in the university',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			}
+
+	  		],
+
+	  		interval_24h:[
+	  			{
+	  				time:'14/02/25 12:00-18:00',
+	  				mood:'5',
+	  				activities: [
+	  					{description:'studying in the university', //list should be ordered by time
+	  					timetag: '12.00-13.00'},
+
+	  					{description:'working',
+	  					timetag: '14.00-15.00'},
+
+	  					{description:'workout in gym',
+	  					timetag: '16.00-17.00'},
+	  				]
+	  			},
+
+	            {
+	  				time:'14/02/25 18:00-24:00',
+	  				mood:'2',
+	  				activities: [
+	  					{description:'movie', //list should be ordered by time
+	  					timetag: '18.00-19.00'},
+
+	  					{description:'eating junk food',
+	  					timetag: '19.00-20.00'},
+
+	  					{description:'soialising',
+	  					timetag: '20.00-21.00'},
+	  				]
+	  			},	  			
+
+	  		]
+
+
+
+	  };
+// Mock Data 2?  
+//	  		interval_6h:[
+//	  			{
+//	  				time:'14/02/25 12:00-18:00',
+//	  				mood:'5',
+//	  				activities: [
+//	  					{description:'Programming in Haskell', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Programming in Haskell',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Programming in Haskell',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//
+//	  			{
+//	  				time:'14/02/26 12:00-18:00',
+//	  				mood:'1',
+//	  				activities: [
+//	  					{description:'Reading Autogenerated Code', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Reading Autogenerated Code',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Reading Autogenerated Code',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//
+//	  			{
+//	  				time:'14/02/27 12:00-18:00',
+//	  				mood:'4',
+//	  				activities: [
+//	  					{description:'Programming in Haskell', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Reading Autogenerated Code',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Programming in Haskell',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//
+//	  			{
+//	  				time:'14/02/28 12:00-18:00',
+//	  				mood:'2',
+///	  				activities: [
+///	  					{description:'Programming in Haskell', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Reading Autogenerated Code',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Reading Autogenerated Code',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			}
+//
+//	  		],
+//
+//	  		interval_12h:[
+//	  			{
+//	  				time:'14/03/01 12:00-18:00',
+//	  				mood:'3',
+//	  				activities: [
+//	  					{description:'Sleeping', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Sleeping in',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Programming in Haskell',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//	  			{
+//	  				time:'14/03/02 12:00-18:00',
+//	  				mood:'1',
+//	  				activities: [
+//	  					{description:'Looking For Keys', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Looking For Wallet',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Looking for Keys',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//	  			{
+//	  				time:'14/03/03 12:00-18:00',
+//	  				mood:'4',
+//	  				activities: [
+//	  					{description:'Sleeping in', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Socialising',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Socialising',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//	  				  			{
+//	  				time:'14/03/04 12:00-18:00',
+//	  				mood:'2',
+//	  				activities: [
+//	  					{description:'Sleeping in', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Attending Lecture',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Attending Lecture',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//	  				  			{
+//	  				time:'14/03/05 12:00-18:00',
+//	  				mood:'3',
+//	  				activities: [
+//	  					{description:'Attending Lecture', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Attending Lecture',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Attending Lecture',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//	  				  			{
+//	  				time:'14/03/06 12:00-18:00',
+//	  				mood:'5',
+//	  				activities: [
+//	  					{description:'Sleeping', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Socialising',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Programming in Haskell',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//	  				  			{
+//	  				time:'14/03/07 12:00-18:00',
+//	  				mood:'2',
+//	  				activities: [
+//	  					{description:'Reading Autogenerated Code', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Finishing Assignments',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Finishing Assignments',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//	  				  			{
+//	  				time:'14/03/08 12:00-18:00',
+//	  				mood:'1',
+//	  				activities: [
+//	  					{description:'Sleeping in', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Socialising',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Socialising',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//	  				  			{
+//	  				time:'14/03/09 12:00-18:00',
+//	  				mood:'2',
+//	  				activities: [
+//	  					{description:'Attending Lecture', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Attending Lecture',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Finishing Assignment',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//	  				  			{
+//	  				time:'14/03/10 12:00-18:00',
+//	  				mood:'3',
+//	  				activities: [
+//	  					{description:'Finishing Assignment', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Attending Lecture',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Socialising',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//	  			{
+//	  				time:'14/03/11 12:00-18:00',
+//	  				mood:'5',
+//	  				activities: [
+//	  					{description:'Sleeping', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Socialising',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Socialising',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//	  				  			{
+//	  				time:'14/03/12 12:00-18:00',
+//	  				mood:'4',
+//	  				activities: [
+//	  					{description:'Sleeping in', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Programming in Haskell',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Programming in Haskell',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//	  			
+//	  			{
+//	  				time:'14/03/13 12:00-18:00',
+//	  				mood:'2',
+//	  				activities: [
+//	  					{description:'Sleeping', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Reading Autogenerated Code',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Reading Autogenerated Code',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//
+//	  			{
+//	  				time:'14/03/14 12:00-18:00',
+//	  				mood:'5',
+//	  				activities: [
+//	  					{description:'Sleeping', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'Sleeping',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'Sleeping',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			}
+//
+//	  		],
+//
+//	  		interval_24h:[
+//	  			{
+//	  				time:'14/03/15 12:00-18:00',
+//	  				mood:'5',
+//	  				activities: [
+//	  					{description:'studying in the university', //list should be ordered by time
+//	  					timetag: '12.00-13.00'},
+//
+//	  					{description:'working',
+//	  					timetag: '14.00-15.00'},
+//
+//	  					{description:'workout in gym',
+//	  					timetag: '16.00-17.00'},
+//	  				]
+//	  			},
+//
+//	  			{
+//	  				time:'14/02/25 18:00-24:00',
+//	  				mood:'2',
+//	  				activities: [
+//	  					{description:'movie', //list should be ordered by time
+//	  					timetag: '18.00-19.00'},
+//
+//	  					{description:'eating junk food',
+//	  					timetag: '19.00-20.00'},
+//
+//	  					{description:'Socialising',
+//	  					timetag: '20.00-21.00'},
+//	  				]
+//	  			},	  			
+//
+//	  		]
+//
+//
+//
+//	  };
+	  
+
 $s.currentIntervals=[];
   		$s.create = function(size){
   			var lines=[size];
