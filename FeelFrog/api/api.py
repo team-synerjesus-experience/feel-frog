@@ -155,20 +155,21 @@ def get_activities(start, end):
 									ON moodEntry_activityattime.activity_id = moodEntry_activity.id
 								WHERE 
 									(moodEntry_activityattime.timeStart BETWEEN datetime(?) AND datetime(?)) OR
-									(moodEntry_activityattime.timeStop BETWEEN datetime(?) AND datetime(?))""",
+									(moodEntry_activityattime.timeStop BETWEEN datetime(?) AND datetime(?))""", 
 							[start_date.isoformat(' '), end_date.isoformat(' '), start_date.isoformat(' '), end_date.isoformat(' ')])
 	
 
 	# this needs finished, get the activities into interval form
 
-	response = {
-		'1hour' : intervals_one,
-		'4hour' : intervals_four,
-		'6hour' : intervals_six,
-		'12hour': intervals_twelve,
-		'24hour': intervals_days
-	}
-	return jsonify( { 'intervals' : response } ), 201
+	# response = {
+	# 	'1hour' : intervals_one,
+	# 	'4hour' : intervals_four,
+	# 	'6hour' : intervals_six,
+	# 	'12hour': intervals_twelve,
+	# 	'24hour': intervals_days
+	# }
+	# return jsonify( { 'intervals' : response } ), 201
+	return jsonify(activities)
 
 @app.route('/v0/add/activity/from/<start>/to/<end>', methods = ['POST'])
 def add_activity(start, end):
