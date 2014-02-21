@@ -32,7 +32,7 @@
   </div>
   <div class="right" id="inputs" style="margin-top:30px;height:420px;width:300px;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
     <ul>
-    	    	<a href="#/input" ng-repeat="line in displayInterval.activities" class="interval"> {{line.description}} </a>
+    	<a href="#/input" ng-repeat="line in displayedLines" class="interval"> {{line}} </a>
     </ul>
   </div>
 
