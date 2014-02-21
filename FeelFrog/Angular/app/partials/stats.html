@@ -1,31 +1,49 @@
   <div class="content">
-    <div class="cf" id="inputs">
-      <div class="left" id="left">
-      <!-- <form method="POST"> -->
+    <div class="cf">
+      <div class="left othertriple">
         <h2> Most benificial activities:</h2>
         <br>
+        <font size="3">
         <ol>
           <li> Sports </li>
           <li> Socialising </li>
           <li> Sleep </li>
           <li> Eating Out </li>
           <li> Relaxing </li>
-        </ol>   
+        </ol>
+      </font>
       </div>
 
-      <div class="right" id="right">
-        <h2>Suggested action:</h2>
+      <div class="right othertriple">
+        <h2>Custom categories:</h2>
+        These should be types of activitys that you do often <br>
+        eg. Video Games, Programming <br> 
+        <br>
+        <h3>1) <input type="text" style="height:15px"></h3>
+        <h3>2) <input type="text" style="height:15px"></h3>
+        <h3>3) <input type="text" style="height:15px"></h3>
+        Note: Changing these after setting them will cause problems with predictions
+        <br>
+        <input type="submit" name="uniques" value="Save" ng-click="submitAction()" >
+      </div>
+
+      <div class="left triple">
+        <h2>Date review:</h2>
         Select date:
         <input type="date">
+        <input type="submit" name="uniques" value="Get Data" ng-click="submitAction()" >
         <br> <br>
         <h3> Predicted mood:</h3>
-        Lazy <br>
+        2 - Could be better<br>
         <h3>Suggestion:</h3>
-        Do sports
+        You might want to try to fit in some Sports or Socialising on this day
       </div>
     
+    <br><br><br><br><br><br><br><br><br><br><br>
+    
     <div id="bottombox">
-      <h1>BOTTOMBOX</h1>
+      <h2>Mood Graph:</h2>
+      <img id ="graph" src="http://chadvice.files.wordpress.com/2011/03/mood-emotion-graph.jpg" alt="You are happy">
     </div>  
 
     <p></p>
