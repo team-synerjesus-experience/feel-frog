@@ -149,12 +149,6 @@ def get_activities(start, end):
 									moodEntry_activity.no,
 									moodEntry_activityattime.timeStart,
 									moodEntry_activityattime.timeStop,
-=======
-	vector_cur = db.execute("""SELECT 
-									moodEntry_activity.no,
-									moodEntry_activityattime.timestart,
-									moodEntry_activityattime.timestop,
->>>>>>> dcefe666a3aad6820b6c47398bf1030e20958655
 									moodEntry_activityattime.description
 								FROM 
 									moodEntry_activityattime 
