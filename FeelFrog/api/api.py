@@ -94,9 +94,9 @@ def get_activities(start, end):
 	db = get_db()
 
 	vector_cur = db.execute("""SELECT 
-									moodEntry_activity.no
-									moodEntry_activityattime.timestart
-									moodEntry_activityattime.timestop
+									moodEntry_activity.no,
+									moodEntry_activityattime.timestart,
+									moodEntry_activityattime.timestop,
 									moodEntry_activityattime.description
 								FROM 
 									moodEntry_activityattime 
