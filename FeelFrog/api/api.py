@@ -214,12 +214,33 @@ def add_mood(time):
 
 		return jsonify(response), 418
 
-	db.execute("insert into moodEntry_moodattime (mood, time) values (?, datetime(?))", [request.json['mood'], time_date.isoformat(' ')])
+	db.execute("insert into moodEntry_moodattime (mood, time, user_id) values (?, datetime(?), 2)", [request.json['mood'], time_date.isoformat(' ')])
 	db.commit()
 
-		# get all numbers of activites between mood times
-		# create/encode vector
-		# store vector
+	activities = db.execute("""SELECT 
+								moodEntry_activity.no
+							FROM 
+								moodEntry_activityattime 
+								INNER JOIN moodEntry_activity
+								ON moodEntry_activityattime.activity_id = moodEntry_activity.id
+							WHERE 
+								(moodEntry_activityattime.timeStart BETWEEN datetime(?) AND datetime(?)) OR
+								(moodEntry_activityattime.timeStop BETWEEN datetime(?) AND datetime(?))""",
+						[mrm_time.isoformat(' '), time_date.isoformat(' '), mrm_time.isoformat(' '), time_date.isoformat(' ')])
+
+	# get all numbers of activites between mood times
+	feature_unencoded = map(lambda x: x[0], activities.fetchall())
+	app.logger.debug(feature_unencoded)
+
+	# create/encode vector
+	features = [1 if any(map(lambda x: x == i, feature_unencoded)) else 0 for i in xrange(10)]
+	features.append(request.json['mood'])
+	encoded = encodeVect(features)
+
+	# store vector
+	db.execute("insert into moodEntry_activityvector (vector, user_id) values (?, 2)", [encoded])
+
+	db.commit()
 
 	response = {
 		'status' : 'success',
