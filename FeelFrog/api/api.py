@@ -208,9 +208,10 @@ def add_activity(start, end):
 
 	app.logger.debug(activity_id[0])
 
-	db.execute(""""insert into moodEntry_activityattime (user_id, activity_id, timeStart, timeStop, description) 
-				   values (2, ?, datetime(?), datetime(?), ?)""", 
-				   [activity_id[0], start_date.isoformat(' '), end_date.isoformat(' '), desc])
+	db.execute("""insert into moodEntry_activityattime 
+		(user_id, activity_id, timeStart, timeStop, description) 
+		values (2, ?, datetime(?), datetime(?), ?)""", 
+		[activity_id[0], start_date.isoformat(' '), end_date.isoformat(' '), desc])
 	
 	db.commit()
 
