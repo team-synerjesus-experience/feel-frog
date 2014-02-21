@@ -411,7 +411,7 @@ $s.currentIntervals=[];
   			$log.log(x);
 
 			$http.post('http://feelfrog.catbrun.ch/api/v0/add/mood', obj, {
-                headers: { 'Content-Type': undefined },
+                headers: { 'Content-Type': 'application/json' },
                 transformRequest: function(data) { return data; }
               }).success(function(data, status, headers, config) {
 
