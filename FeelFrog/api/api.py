@@ -6,6 +6,7 @@ import os
 from math import isnan
 from vectorCode import decodeVect, encodeVect
 from numpy import std
+import collections
 
 app = Flask(__name__)
 
@@ -279,6 +280,7 @@ def add_mood():
 								(moodEntry_activityattime.timeStop BETWEEN datetime(?) AND datetime(?))""",
 						[mrm_time.isoformat(' '), time_date.isoformat(' '), mrm_time.isoformat(' '), time_date.isoformat(' ')])
 
+
 	# get all numbers of activites between mood times
 	feature_unencoded = map(lambda x: x[0], activities.fetchall())
 	app.logger.debug(feature_unencoded)
@@ -299,6 +301,69 @@ def add_mood():
 		'msg'    : ''
 	}
 	return jsonify(response), 201 # change 201 depending on success_state
+
+def build_interval(a, span):
+	r = []
+	while span > 0:
+		try:
+			r.append(a.popleft())
+		except IndexError:
+			return r, False
+
+		s = date_parse_db(r[-1]['timeStart'])
+		e = date_parse_db(r[-1]['timeStop'])
+		d = e-s
+		span = span - (d.seconds / 3600)
+		app.logger.debug(d.seconds)
+	return r, True
+
+
+@app.route('/v0/get/intervals', methods = ['POST'])
+def get_n_intervals():
+	if not request.json or not 'user' in request.json or not 'start' in request.json or not 'count' in request.json or not 'span' in request.json:
+		abort(400)
+
+	time_date = date_parse(request.json['start'])
+	count = request.json['count']
+	span = request.json['span']
+
+	if time_date is None:
+		response = {
+			'status' : 'failure',
+			'code'   : 106,
+			'msg'    : 'Invalid Time (Attempting to time-travel)'
+		}
+
+		return jsonify(response), 418
+
+	db = get_db()
+
+	activities = db.execute("""SELECT 
+									moodEntry_activity.no,
+									moodEntry_activityattime.timeStart,
+									moodEntry_activityattime.timeStop,
+									moodEntry_activityattime.description
+								FROM 
+									moodEntry_activityattime 
+									INNER JOIN moodEntry_activity
+									ON moodEntry_activityattime.activity_id = moodEntry_activity.id
+								WHERE 
+									(moodEntry_activityattime.timeStart >= datetime(?)) OR
+									(moodEntry_activityattime.timeStop >= datetime(?))
+								ORDER BY
+									moodEntry_activityattime.timeStart ASC""", 
+							[time_date.isoformat(' '), time_date.isoformat(' ')])
+
+	fetched_activities = collections.deque(map(lambda x: {
+										'no' : x[0],
+										'timeStart' : x[1],
+										'timeStop' : x[2],
+										'description' : x[3]
+									}, activities.fetchall()))
+
+	intervals = map(lambda x: x[0], filter(lambda x: x[0], [build_interval(fetched_activities, span) for r in xrange(count)]))
+
+	return jsonify( { 'intervals' : map(lambda x: { 'interval': x }, intervals) } ), 201
 
 # Uses format string %Y%m%d%H%M
 def date_parse(input):
