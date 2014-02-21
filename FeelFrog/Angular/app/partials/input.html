@@ -1,50 +1,48 @@
 <div class="content">
   <div id="inputs" class="content">
     <form method="POST">
-      <h2> Select mood</h2>
+      <h2> Enter Mood</h2>
+      Enter the current time:<br>
       <input ng-model="date1" type="date"><input ng-model="time1" type="time"><br>
-      <input ng-model="mood" type="radio" name="mood" value=5> Tim Minchin <br> <!--need to make sure these are numbers-->
-      <input ng-model="mood" type="radio" name="mood" value=4 checked> Good <br>
-      <input ng-model="mood" type="radio" name="mood" value=3>Fiiiine<br>
-      <input ng-model="mood" type="radio" name="mood" value=2>Fiiiiine :(<br>
-      <input ng-model="mood" type="radio" name="mood" value=1>Emo music plx<br>
+      <br>
+      How are you feeling right now?:<br>
+      <input ng-model="mood" type="radio" name="mood" value=5>Great<br> <!--need to make sure these are numbers-->
+      <input ng-model="mood" type="radio" name="mood" value=4>Good<br>
+      <input ng-model="mood" type="radio" name="mood" value=3>Ok<br>
+      <input ng-model="mood" type="radio" name="mood" value=2>Could be better<br>
+      <input ng-model="mood" type="radio" name="mood" value=1>Not good<br>
+      <br>
       <input ng-model="mood" type="submit" ng-click="submitMood()"><br>
     </form>
-   mood: {{mood}}
-   <br>
-   date: {{date}}
   </div>
   <div id="inputs" class="content">
     <form method="POST">
-      <h2> Select action</h2>
+      <h2> Enter action</h2>
       Start time:<br>
       <input ng-model="date2" type="date"> <input ng-model="time2" type="time"> <br>
+      <br>
       End time: <br>
       <input ng-model="date3" type="date"><input ng-model="time3" type="time"><br>
-      <select ng-model="category">
-        <option  value="0">Code code codecode</option>
-        <option value="1">Work</option>
-        <option value="2">House chores</option>
-        <option value="3">Sports</option>
-        <option value="4">Socialising</option>
-        <option value="5">Gaming</option>
-        <option value="6">Eating junk food</option>
-        <option value="7">Eating healthy</option>
-        <option value="8">Streaking</option>
-        <option value="9">Fishing</option>       
-      </select>
-      <br>Enter a brief description:
+      <br>
+      Enter a brief description:
       <textarea ng-model="text" rows="2" cols="30">
       </textarea>
+      Choose the category:
+      <select ng-model="category">
+        <option  value="0">Sleep</option>
+        <option value="1">Work</option>
+        <option value="2">University/School</option>
+        <option value="3">Socialising</option>
+        <option value="4">Sports</option>
+        <option value="5">Eating Out</option>
+        <option value="6">Relaxing</option>
+        <option value="7">-Custom 1-</option>
+        <option value="8">-Custom 2-</option>
+        <option value="9">-Custom 3-</option>       
+      </select>
+      <br> <br>
       <input type="submit" ng-click="submitAction()">
     </form>
-    Date start is: {{date2}}
-    <br>
-    Date end is: {{date3}}
-    <br>
-    category is: {{category}}
-    <br>
-    description is: {{text}}
 
   </div>
 </div>

@@ -401,7 +401,7 @@ $s.currentIntervals=[];
   			var x=angular.toJson(obj);
   			$log.log(x);
 
-			$http.post('127.0.0.1:5000/v0/add/mood', obj, {
+			$http.post('http://127.0.0.1:5000/v0/add/mood', obj, {
                 headers: { 'Content-Type': undefined },
                 transformRequest: function(data) { return data; }
               }).success(function(data, status, headers, config) {

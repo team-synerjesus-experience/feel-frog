@@ -1,32 +1,40 @@
-  <div class="content">
-    <div id="inputs">
-      <form method="POST">
-      <h2> Activities rated by effect on mood</h2>
+<div class="content cf">
+    <script>
+      $(document).ready(function() {
+        $(".intervals").addClass('inactive');
+        $(".intervals").first().removeClass('inactive');
+        $(".intervals").click(function() {
+        $(".intervals").addClass('inactive');
+        $(this).removeClass("inactive");
+        });
+      });
+    </script>
+  <h2>
+  Choose an interval
+  </h2>
+  <div class="left">
+  	<ul class="header">
+        <li><a class="button intervals skyblue" ng-click="chooseIntervalGrain('interval_6h');create(6)">6h</a></li>	
+        <li><a class="button intervals skyblue" ng-click="chooseIntervalGrain('interval_12h');create(12)">12h</a></li>	
+        <li><a class="button intervals skyblue" ng-click="chooseIntervalGrain('interval_24h');create(24)">24h</a></li>	
+    </ul>
 
-      <ol>
-        <li> Sleeping </li>
-        <li> Socialising </li>
-        <li> Gaming </li>
-        <li> Programming </li>
-        <li> Something </li>
-      </ol>   
-    </form>
-  </div>
+    <div id="times" class="skyblue" style="height:420px;width:300px;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 
-    <div id="inputs">
-      <form method="POST">
+      <ul>
+        <li class="interval" ng-style="{{getColor(interval)}}" ng-repeat="interval in currentIntervals" ng-click="chooseInterval(interval)" > {{interval.time}}</li>      
+      </ul>
 
-
-      <h2> Suggested action</h2>
-      Select date:
-      <input type="date">
-      <h2> Predicted mood</h2>
-      Lazy <br>
-      <h3>Suggestion:</h3>
-      Do sports
-    </form>
     </div>
 
+  	<div id="inputs">
+    </div>
+  </div>
+  <div class="right" id="inputs" style="margin-top:30px;height:420px;width:300px;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    <ul>
+    	<a href="#/input" ng-repeat="line in displayedLines" class="interval"> {{line}} </a>
+    </ul>
+  </div>
 
     <p></p>
      
