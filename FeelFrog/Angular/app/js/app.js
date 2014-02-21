@@ -16,4 +16,3 @@ app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/output', {templateUrl: 'partials/output.html', controller: 'MyCtrl1'});
   $routeProvider.otherwise({redirectTo: '/input'});
 }]);
-

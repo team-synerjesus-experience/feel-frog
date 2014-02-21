@@ -7,6 +7,21 @@
     <link rel="stylesheet" href="css/app.css"/>
     <link rel="icon" type="image/png" href="img/Icon.png" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+          str = window.location.href.split("/");
+          $(".button").addClass('inactive');
+          $(".button").each(function() {
+            if ($(this).text().toLowerCase() == str[str.length-1] && !($(this).hasClass('intervals'))) {
+              $(this).removeClass('inactive');
+            }
+          });
+          $(".button").click(function() {
+            $(".button").addClass('inactive');
+            $(this).removeClass('inactive');
+          });
+      });
+    </script>
   </head>
 
 
@@ -18,8 +33,8 @@
 
       <header class="header" id="nav" >
         <ul>
-          <li><a class="button" href="#/input">input</a></li>
-          <li><a class="button" href="#/output">output</a></li>
+          <li><a class="button" href="#/input">Input</a></li>
+          <li><a class="button" href="#/output">Output</a></li>
           <li><a class="button" href="#/stats">Stats</a></li>
           <li><a class="button" href="theEnd">Logout</a></li>
         </ul>
