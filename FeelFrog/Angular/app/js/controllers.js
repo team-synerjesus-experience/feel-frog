@@ -395,7 +395,7 @@ $s.currentIntervals=[];
   		$s.submitMood = function(){
   			var obj={
   				mood:$s.mood,
-  				date:$s.timeStringMood($s.date1, $s.time1),
+  				time:$s.timeStringMood($s.date0, $s.time1),
   				user:2
   			};
   			var x=angular.toJson(obj);
@@ -421,7 +421,7 @@ $s.currentIntervals=[];
   			var x=angular.toJson(obj);
   			$log.log(x);
 
-			$http.post('127.0.0.1:5000/v0/add/activity', obj, {
+			$http.post('http://feelfrog.catbrun.ch/api/v0add/activity', obj, {
                 headers: { 'Content-Type': undefined },
                 transformRequest: function(data) { return data; }
               }).success(function(data, status, headers, config) {
