@@ -144,7 +144,6 @@ def get_activities(start, end):
 
 	db = get_db()
 
-<<<<<<< HEAD
 	activities = db.execute("""SELECT 
 									moodEntry_activity.no,
 									moodEntry_activityattime.timeStart,
