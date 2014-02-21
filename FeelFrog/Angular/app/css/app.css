@@ -115,6 +115,7 @@ input[type=text]{
   top:1px;
 }
 
+<<<<<<< HEAD
 .inactive {
   box-shadow:inset 0px -3px 3px -3px #333;
 }
@@ -136,6 +137,10 @@ ul.header {
 
 #times {
   border:0;
+=======
+.small-button{
+  width:50px;
+>>>>>>> aff1a90561e7001a338cb75989cb018d31a075c4
 }
 
 #inputs {
@@ -181,4 +186,26 @@ ul.header {
   position:relative;
   top:1px;
 }
+<<<<<<< HEAD
 /* This button was generated using CSSButtonGenerator.com */
+=======
+
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
+>>>>>>> aff1a90561e7001a338cb75989cb018d31a075c4
