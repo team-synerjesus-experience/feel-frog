@@ -32,15 +32,17 @@ Error codes are defined in another document
 
 Retrieves a set of mood values taken within a given interval.
 
-Example: `/v1/get/mood`
-URL Parameters: None
-Request Type: POST
+_Example_: `/v1/get/mood`
 
-Request Parameters:
+_URL Parameters_: None
+
+_Request Type_: POST
+
+_Request Parameters_:
 * `start`: Encoded date/time specifying start of interval
 * `end`: Encoded date/time specifying end of interval
 
-Response Parameters:
+_Response Parameters_:
 * `moods`: A list of mood values, ordered by time, with the following format:
 	* `value`: Integer mood value
 	* `time` : Encoded time of recording
